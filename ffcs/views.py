@@ -41,5 +41,18 @@ def logout():
     session.pop('username', None)
     flash('Logged out.')
     return redirect(url_for('index'))
+@app.route('/add/course', methods=['GET', 'POST'])
+def store():
+	if request.method=="POST":
+		course_code=request.form['course_code']
+		course_name=request.form['course_name']
+		if not course_code:
+			flash('You must provide course code')
+		elif not course_name:
+			flash('You must provide course name')
+		else:
+			User(session['username']).add_course(course_name, course_code)
+		return redirect(url_for('index'))
+	return render_template('add_course.html')
 
 

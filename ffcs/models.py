@@ -29,6 +29,7 @@ class User:
 			return False
 	#Add Course
 	def add_course(self, course_name, course_code):
+		user=self.find()
 		course = Node(
 			'Course',
 			id=str(uuid.uuid4()),

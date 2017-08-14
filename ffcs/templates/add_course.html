@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Add Course</h2>
+	<form action="{{ url_for('store') }}" method="post">
+        <dl>
+            <dt>Course Code(Eg. CSE301):</dt>
+            <dd><input type="text" name="course_code"></dd>
+            <dt>Course Name(Eg. Database Systems)</dt>
+            <dd><input type="text" name="course_name"></dd>
+        </dl>
+        <input type="submit" value="Register">
+	</form>
+{% endblock %}
