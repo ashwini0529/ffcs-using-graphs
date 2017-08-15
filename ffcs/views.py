@@ -1,4 +1,4 @@
-from .models import User
+from .models import User, fetch_all_courses
 from flask import Flask, request, session, redirect, url_for, render_template, flash
 
 app = Flask(__name__,template_folder='templates')
@@ -54,5 +54,19 @@ def store():
 			User(session['username']).add_course(course_name, course_code)
 		return redirect(url_for('index'))
 	return render_template('add_course.html')
+@app.route('/add/pre-requisite', methods=['GET','POST'])
+def linkCourses():
+	if request.method=="POST":
+		course_code=request.form['course_code']
+		pr_course_code=request.form['pr_course_code']
+		if not pr_course_code:
+			flash('Please provide Pre requisite Course Code')
+		elif not course_code:
+			flash('Please provide Course Code')
+		else:
+			User(session['username']).add_preRequisite(course_code, pr_course_code)
+		return redirect(url_for('index'))
+	courses = list(fetch_all_courses())
+	return render_template('add_prerequisite.html', courses=courses)
 
 

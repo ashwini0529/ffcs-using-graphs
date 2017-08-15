@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Add Pre Requisite</h2>
+
+  
+	<form action="{{ url_for('linkCourses') }}" method="post">
+        <dl>
+            <dt>Course Name(Eg. Database Systems):</dt>
+            <select name="course_code">
+                {% for course in courses %}
+                     <option value="{{course.course_code}}">{{course.course_name}}</option>
+                {%endfor%}
+            </select>
+
+            <dt>Pre Requisite Course Code(Eg. Data Structures and Algorithms):</dt>
+            <select name="pr_course_code">
+                {% for course in courses %}
+                     <option value="{{course.course_code}}">{{course.course_name}}</option>
+                {%endfor%}
+            </select>
+            
+        </dl>
+        <input type="submit" value="Add Pre Requisite">
+	</form>
+{% endblock %}

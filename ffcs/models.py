@@ -45,7 +45,14 @@ class User:
 		pr_course = graph.find_one('Course', 'code', pr_course_code)
 		graph.merge(Relationship(pr_course, 'PREREQUISITE_OF', course))
 
-#Generic Functions
+#Generic Functions and queries
+
+def fetch_all_courses():
+	query = '''
+	MATCH (n:Course) RETURN n.code as course_code, 
+	n.name as course_name
+	'''
+	return graph.run(query)
 def timestamp():
     epoch = datetime.utcfromtimestamp(0)
     now = datetime.now()
